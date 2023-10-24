@@ -15,9 +15,7 @@ with open("contacts_file.csv") as file:
         email_password = 'okkcoaisutyoykkp'
         # email_receiver = 'cimitax547@unbiex.com'
         email_subject = 'Check out my SMPT code working with gmail'
-        email_body = """
-            Hey, I am sending this email using Python, SMPT and Gmail.
-            """
+        email_body = f'Hey {name}, I am sending this email using Python, SMPT and Gmail SMPT Server.'
         
         # Email Object
         em = EmailMessage()
@@ -34,4 +32,5 @@ with open("contacts_file.csv") as file:
             server.login(email_sender, email_password)
             server.send_message(em)
             print('Email sent successfully')
+            
         
