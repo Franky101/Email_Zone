@@ -22,6 +22,7 @@ Use the Yagmail package to send email through your Gmail account using only a fe
     - email_sender.py
 
 - Sending Fancy Emails with HTML using MIME
+    - html_email.py
 
 - Pulling emails with IMAP
 - Saving emails locally
@@ -29,7 +30,7 @@ Use the Yagmail package to send email through your Gmail account using only a fe
 
 *Advanced*
 
-- Sending Emails to a list of mails
+- Sending Multiple Personalized Emails
 - Emails with html format
 
 *Expert*
