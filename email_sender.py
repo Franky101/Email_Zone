@@ -4,6 +4,7 @@ import getpass
 import os
 import ssl
 import smtplib
+import re
 
 
 email_sender = 'becerrafranco1992@gmail.com'
@@ -28,4 +29,3 @@ with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as server:
     server.send_message(em)
     print('Email sent successfully')
 
-    
