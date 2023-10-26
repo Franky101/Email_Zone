@@ -32,6 +32,8 @@ Use the Yagmail package to send email through your Gmail account using only a fe
 
 - Sending Multiple Personalized Emails
 - Emails with html format
+- spam filter
+    
 
 *Expert*
 
