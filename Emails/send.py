@@ -2,7 +2,7 @@ import sys
 import requests
 from datetime import datetime
 
-from formatting import formag_msg
+from formatting import format_msg
 from send_mail import send_mail
 
 def send(name, website=None, to_email=None, verbose=False):
@@ -12,7 +12,7 @@ def send(name, website=None, to_email=None, verbose=False):
     else:
         msg = format_msg(my_name=name)
     if verbose:
-        print(name, website)
+        print(name, website, to_email)
 
     #send message
     send_mail(text=msg, to_emails=[to_email], html=None)
