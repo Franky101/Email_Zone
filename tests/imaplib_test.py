@@ -1,4 +1,5 @@
 import imaplib, email
+import re
 
 user = "becerrafranco1992@gmail.com"
 password = "okkcoaisutyoykkp"
@@ -15,12 +16,7 @@ def get_body_email(msg):
     else:
         return msg.get_payload(None,True)
     
-def search(key, value, con):
-    '''
-    This function search for a particular email
-    '''
-    result, data = con.search(None, key, '"{}"'.format(value))
-    return data
+
 
 def headers_in_email(raw):
     print(get_body_email(raw))
@@ -41,9 +37,21 @@ result, data = conn.fetch(b'1','(RFC822)')
 
 raw = email.message_from_bytes(data[0][1])
 
-
-
-
 #headers_in_email(raw)
 
-search("FROM", "mail-noreply@gmail.com",conn)
+
+def search(key, value, con):
+    '''
+    This function search for a particular email
+    '''
+    print("***before search***")
+    result, data = con.search(None, key, '"{}"'.format(value))
+    print("***after search***")
+    return data
+
+
+pattern = "[^@\s]+@[^@\s]+\.[^@\s]+"
+
+search("FROM", "",conn)
+search("SUBJECT", "",conn)
+search("SUBJECT", "",conn)

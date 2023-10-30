@@ -3,7 +3,7 @@ import requests
 from datetime import datetime
 
 from formatting import format_msg
-from send_mail import send_mail
+from send_mail import send_email
 
 def send(name, website=None, to_email=None, verbose=False):
     assert to_email != None
@@ -15,7 +15,7 @@ def send(name, website=None, to_email=None, verbose=False):
         print(name, website, to_email)
 
     #send message
-    send_mail(text=msg, to_emails=[to_email], html=None)
+    send_email(text=msg, to_emails=[to_email], html=None)
 
 
 if __name__ == "__main__":
