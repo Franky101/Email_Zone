@@ -3,17 +3,13 @@ import smtplib
 from email.mime.text import MIMEText # for plain text email
 from email.mime.multipart import MIMEMultipart # for multipart email (text and html)
 
-
 # Environment variables
-username = 'becerrafranco1992@gmail.com'
+username = os.environ["USERNAME"]
 # os.environ.get("EMAIL_PASSWORD")
-email_password = 'okkcoaisutyoykkp'
+email_password = os.environ["PASSWORD"]
 # email_receiver = 'cimitax547@unbiex.com'
 email_receiver = 'becerrafranco1992@gmail.com'
 email_subject = 'Check out my SMPT code working with gmail'
-
-
-
 
 
 def send_email(text='Email Body', subject='Email Subject', from_email=f'Program Master <{username}>', to_emails=None, html=None):
