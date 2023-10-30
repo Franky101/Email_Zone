@@ -15,7 +15,8 @@ def connect_to_gmail():
     M.select()
     
     conn = imaplib.IMAP4_SSL(imap_server, imap_port)
-    conn.login("becerrafranco1992@gmail.com", "okkcoaisutyoykkp")
+    user = os.environ["USERNAME"]
+    conn.login("@gmail.com", "")
 
     return conn
 

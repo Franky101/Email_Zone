@@ -1,8 +1,8 @@
 import imaplib, email
 import re
 
-user = "becerrafranco1992@gmail.com"
-password = "okkcoaisutyoykkp"
+user = "@gmail.com"
+password = ""
 imap_url = "imap.gmail.com"
 #imap_port = 993
 

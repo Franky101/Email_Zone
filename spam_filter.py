@@ -12,7 +12,7 @@ def connect_to_gmail():
     imap_port = 993
 
     conn = imaplib.IMAP4_SSL(imap_server, imap_port)
-    conn.login("becerrafranco1992@gmail.com", "okkcoaisutyoykkp")
+    conn.login("@gmail.com", "")
 
     return conn
 

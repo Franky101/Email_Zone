@@ -7,9 +7,9 @@ import smtplib
 import re
 
 
-email_sender = 'becerrafranco1992@gmail.com'
+email_sender = '@gmail.com'
 # os.environ.get("EMAIL_PASSWORD")
-email_password = 'okkcoaisutyoykkp'
+email_password = ''
 # email_receiver = 'cimitax547@unbiex.com'
 email_receiver = 'becerrafranco1992@gmail.com'
 email_subject = 'Check out my SMPT code working with gmail'

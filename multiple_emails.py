@@ -10,9 +10,9 @@ with open("contacts_file.csv") as file:
     for name, email, grade in reader:
         print(f"Sending email to {name}")
         # Email Headers
-        email_sender = 'becerrafranco1992@gmail.com'
+        email_sender = '@gmail.com'
         # os.environ.get("EMAIL_PASSWORD")
-        email_password = 'okkcoaisutyoykkp'
+        email_password = ''
         # email_receiver = 'cimitax547@unbiex.com'
         email_subject = 'Check out my SMPT code working with gmail'
         email_body = f"""
