@@ -3,43 +3,86 @@ import smtplib
 import dotenv
 from email.mime.text import MIMEText # for plain text email
 from email.mime.multipart import MIMEMultipart # for multipart email (text and html)
+import datetime
 
 dotenv.load_dotenv()
 
-# Environment variables
-#username = os.environ.get("USERNAME")
-#password = os.environ.get("PASSWORD")
-
-username = 'becerrafranco1992@gmail.com'
-password = 'okkcoaisutyoykkp'
+######### Setup your stuff here #######################################
+username = os.environ.get("EMAIL_USER")
+password = os.environ.get("PASSWORD")
 
 email_list = ['becerrafranco1992@gmail.com']
-email_subject = 'Check out my SMPT code working with gmail'
+email_subject = 'MultiPartTest'
 
 
-
-def send_email(text='Email Body', subject=email_subject, from_email='FrancoSender1 <becerrafranco1992@gmail.com>', to_emails=email_list, html=None):
+def send_email(text='Email Body', subject=email_subject, from_email='FrancoSender1 <becerrafranco1992@gmail.com>', to_emails=email_list, html=True):
     assert isinstance(to_emails, list)
-    msg = MIMEMultipart('alternative')
-    msg['From'] = from_email
-    msg['To'] =  ", ".join(to_emails)
-    msg['Subject'] =  subject
-
+    message = MIMEMultipart('alternative')
+    message['From'] = from_email
+    message['To'] =  ", ".join(to_emails)
+    message['Subject'] = subject
+    
+    # Attach plain text part
     txt_part = MIMEText(text, 'plain')
-    msg.attach(txt_part)
-    if html != None:
-        html_part = MIMEText("<h1>This is working</h1>", 'html')
-        msg.attach(html_part)
+    message.attach(txt_part)
 
-    # Put message as string
-    msg_str = msg.as_string()
+    # Get the current date and time
+    current_datetime = datetime.datetime.now()
 
-    # Login to smpt server
+    # Format the date and time as a string
+    formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+
+    # Attach formatted date and time as text part
+    date_part = MIMEText(f"Formatted Date and Time: {formatted_datetime}", 'plain')
+    message.attach(date_part)
+
+    
+    # Create the plain-text and HTML version of your message
+    text = """\
+    Hi,
+    How are you?
+    Real Python has many great tutorials:
+    www.realpython.com"""
+    html = """\
+    <html>
+    <body>
+        <h1><strong>Hi!</strong></h1>
+        <p><b>How are you?</b></p>
+        <p><a href="http://www.realpython.com">Real Python</a> 
+        has many great tutorials.</p>
+    </body>
+    </html>
+    """
+
+    # Turn these into plain/html MIMEText objects
+    part1 = MIMEText(text, "plain")
+    part2 = MIMEText(html, "html")
+
+    # Add HTML/plain-text parts to MIMEMultipart message
+    # The email client will try to render the last part first
+    message.attach(part1)
+    message.attach(part2)
+
+
+    # Convert the message to a string
+    message_str = message.as_string()
+
+    ######### In normal use nothing changes below this line ###############
+
+    # Login to SMTP server
     server = smtplib.SMTP(host='smtp.gmail.com', port=587)
     server.ehlo()
     server.starttls()
     server.login(username, password)
-    server.sendmail(from_email, to_emails, msg_str)
+
+    # Send the email
+    server.sendmail(from_email, to_emails, message_str)
+    print('Email sent')
+
+    # Close the server connection
     server.quit()
 
+# Call the send_email function
 send_email()
+
+
