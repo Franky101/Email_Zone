@@ -33,8 +33,7 @@ def send_email(text='Email Body', subject=email_subject, from_email='FrancoSende
     formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
 
     # Attach formatted date and time as text part
-    date_part = MIMEText(f"Formatted Date and Time: {formatted_datetime}", 'plain')
-    message.attach(date_part)
+    date_part = f"Formatted Date and Time: {formatted_datetime}"
 
     
     # Create the plain-text and HTML version of your message
@@ -42,14 +41,27 @@ def send_email(text='Email Body', subject=email_subject, from_email='FrancoSende
     Hi,
     How are you?
     Real Python has many great tutorials:
-    www.realpython.com"""
-    html = """\
+    www.realpython.com
+    """
+    html = f"""\
     <html>
     <body>
         <h1><strong>Hi!</strong></h1>
-        <p><b>How are you?</b></p>
+        <h1>This is a test message for HTML format</h1>
+        <br>
+        <h3>Intro</h3>
+        <p>For now, this can only be sent as a single piece of html since if I try to attach several parts, the email will only show the last piece attached, meaning that I will have to work this only html and won't be able to add more pieces </p>
+        <br>
+        <h3>Theory</h3>
+        <p>Just guessing, but I think that I can compile several variables with html format to build this single html object.</p>
+        <p>I will test that theory later, perhaps there is a better way.</p>
         <p><a href="http://www.realpython.com">Real Python</a> 
         has many great tutorials.</p>
+        
+        <br>
+        <br>
+        <b>{date_part}</b>
+
     </body>
     </html>
     """
