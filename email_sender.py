@@ -7,10 +7,8 @@ import smtplib
 import re
 
 
-email_sender = '@gmail.com'
-# os.environ.get("EMAIL_PASSWORD")
-email_password = ''
-# email_receiver = 'cimitax547@unbiex.com'
+username = os.environ.get("USERNAME")
+email_password = os.environ.get("PASSWORD")
 email_receiver = 'becerrafranco1992@gmail.com'
 email_subject = 'Check out my SMPT code working with gmail'
 email_body = """
@@ -18,14 +16,14 @@ email_body = """
     """
 em = EmailMessage()
 em['Subject'] = email_subject
-em['From'] = email_sender
+em['From'] = username
 em['To'] = email_receiver
 em.set_content(email_body)
 
 context = ssl.create_default_context()
 
 with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as server:
-    server.login(email_sender, email_password)
+    server.login(username, email_password)
     server.send_message(em)
     print('Email sent successfully')
 

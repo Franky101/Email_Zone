@@ -1,5 +1,6 @@
 import imaplib
 import email
+import os
 
 def connect_to_gmail():
     """Connects to your Gmail account using IMAP.

@@ -1,2 +1,6 @@
 variables.env
+*.env
+config.py
+/venv
 /Emails/variables.env
+/tests
