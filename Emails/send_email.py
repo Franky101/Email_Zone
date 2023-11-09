@@ -55,7 +55,7 @@ def send_email(text='Email Body', subject=email_subject, from_email='FrancoSende
         <h3>Theory</h3>
         <p>Just guessing, but I think that I can compile several variables with html format to build this single html object.</p>
         <p>I will test that theory later, perhaps there is a better way.</p>
-        <p><a href="http://www.realpython.com">Real Python</a> 
+        <p><a href="https://realpython.com/python-send-email/">Real Python</a> 
         has many great tutorials.</p>
         
         <br>
