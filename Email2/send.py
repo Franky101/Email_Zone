@@ -4,7 +4,14 @@ from datetime import datetime
 from formatting import format_msg
 from send_email import send_email
 
-def send(name, website=None, to_email=None, verbose=True):
+
+
+
+def send(name, website=None, to_email=None, verbose=None):
+    '''
+    The following function will send an email with the args inserted
+    '''
+    
     assert to_email != None
     if website != None:
         msg = format_msg(my_name=name,my_website=website)
