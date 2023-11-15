@@ -95,6 +95,9 @@ def send_email(text='Email Body', subject=email_subject, from_email='FrancoSende
     server.quit()
 
 # Call the send_email function
-send_email()
+# send_email()
 
+if __name__ == "__main__":
+    # Call the send_email function only if this script is run directly
+    send_email()
 
