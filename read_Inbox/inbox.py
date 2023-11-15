@@ -24,6 +24,8 @@ def get_inbox():
     mail.select("inbox")
     # Check Unseen messages
     _, search_data = mail.search(None, 'UNSEEN')
+
+
     my_message = []
     for num in search_data[0].split():
         email_data = {}
@@ -33,23 +35,43 @@ def get_inbox():
         email_message = email.message_from_bytes(b)
 
         for header in ['subject','to','from','date']:
-            print("{}: {}".format(header, email_message[header]))
+            # print("{}: {}".format(header, email_message[header]))
             email_data[header] = email_message[header]
+
+        body = ""
+        html_body = ""
 
         for part in email_message.walk():
             if part.get_content_type() == 'text/plain':
-                body = part.get_payload(decode=True)
-                email_data['body'] = body.decode()
+                body += part.get_payload(decode=True).decode("utf-8")
 
             elif part.get_content_type() == 'text/html':
-                html_body = part.get_payload(decode=True)
-                email_data['html_body'] = html_body.decode()
+                html_body += part.get_payload(decode=True).decode("utf-8")
+
+        email_data['body'] = body.strip()
+        email_data['html_body'] = html_body.strip()
         my_message.append(email_data)
     return my_message
 
+def formatted_message(message):
+    print("=" * 11)
+    print(f"subject: {message['subject']}")
+    print(f"to: {message['to']}")
+    print(f"from: {message['from']}")
+    print(f"date: {message['date']}")
+    print("body:")
+    if message['html_body']:
+        print(message['html_body'])
+
+    elif message['body']:
+        print(message['body'])
+    else:
+        print("No body found")
+    print("=" * 11)   
+
 if __name__ == "__main__":
     my_inbox = get_inbox()
-    print(my_inbox)
-
+    for msg in my_inbox:
+        formatted_message(msg)
 
 

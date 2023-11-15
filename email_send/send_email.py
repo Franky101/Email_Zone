@@ -39,9 +39,8 @@ def send_email(text='Email Body', subject=email_subject, from_email='FrancoSende
     # Create the plain-text and HTML version of your message
     text = """\
     Hi,
-    How are you?
-    Real Python has many great tutorials:
-    www.realpython.com
+    This is the plain text version of the email.
+    This should only be seen as an alternative if the HTML version can't be seen for any reason.
     """
     html = f"""\
     <html>
