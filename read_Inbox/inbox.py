@@ -3,6 +3,7 @@ import email
 import os
 import dotenv
 import sys
+from bs4 import BeautifulSoup
 
 # Add the parent directory of the current script to the sys.path
 current_dir = os.path.dirname(os.path.realpath(__file__))
@@ -16,6 +17,12 @@ dotenv.load_dotenv()
 host = 'imap.gmail.com'
 username = os.environ.get("EMAIL_USER")
 password = os.environ.get("PASSWORD")
+
+
+def extract_text_from_html(html_body):
+    soup = BeautifulSoup(html_body, 'html.parser')
+    text = soup.get_text(separator='\n', strip=True)
+    return text
 
 def get_inbox():
     # Connect to host using SSL
@@ -49,7 +56,7 @@ def get_inbox():
                 html_body += part.get_payload(decode=True).decode("utf-8")
 
         email_data['body'] = body.strip()
-        email_data['html_body'] = html_body.strip()
+        email_data['html_body'] = extract_text_from_html(html_body)
         my_message.append(email_data)
     return my_message
 
