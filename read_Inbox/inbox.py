@@ -43,7 +43,6 @@ def get_inbox():
 
             elif part.get_content_type() == 'text/html':
                 html_body = part.get_payload(decode=True)
-                print("HTML:\n")
                 email_data['html_body'] = html_body.decode()
         my_message.append(email_data)
     return my_message
