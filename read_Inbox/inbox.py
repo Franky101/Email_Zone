@@ -4,6 +4,7 @@ import os
 import dotenv
 import sys
 from bs4 import BeautifulSoup
+from email.header import decode_header
 
 # Add the parent directory of the current script to the sys.path
 current_dir = os.path.dirname(os.path.realpath(__file__))
@@ -61,8 +62,16 @@ def get_inbox():
     return my_message
 
 def formatted_message(message):
+    decoded_subject = decode_header(message['subject'])
+    subject = decoded_subject[0][0]
+    encoding = decoded_subject[0][1]
+    
+    # Check if subject needs decoding
+    if isinstance(subject, bytes):
+        subject = subject.decode(encoding or 'utf-8')  # Decode bytes to string
+
     print("=" * 11)
-    print(f"subject: {message['subject']}")
+    print(f"subject: {subject}")
     print(f"to: {message['to']}")
     print(f"from: {message['from']}")
     print(f"date: {message['date']}")
