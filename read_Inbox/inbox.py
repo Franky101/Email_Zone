@@ -51,13 +51,24 @@ def get_inbox():
 
         for part in email_message.walk():
             if part.get_content_type() == 'text/plain':
-                body += part.get_payload(decode=True).decode("utf-8")
+                try:
+                    body = part.get_payload(decode=True).decode("utf-8")
+                except UnicodeDecodeError:
+                    # Try decoding with different codecs or ignore errors
+                    try:
+                        body = part.get_payload(decode=True).decode("latin-1")  # Example: Try 'latin-1' encoding
+                    except UnicodeDecodeError:
+                        body = part.get_payload(decode=True).decode("utf-8", errors='ignore')  # Ignore problematic characters
+                email_data['body'] = body.strip()
 
             elif part.get_content_type() == 'text/html':
-                html_body += part.get_payload(decode=True).decode("utf-8")
+                try:
+                    html_body = part.get_payload(decode=True).decode("utf-8")
+                except UnicodeDecodeError:
+                    # Handle decoding issue for HTML content similarly
+                    html_body = part.get_payload(decode=True).decode("utf-8", errors='ignore')
 
-        email_data['body'] = body.strip()
-        email_data['html_body'] = extract_text_from_html(html_body)
+            email_data['html_body'] = extract_text_from_html(html_body)
         my_message.append(email_data)
     return my_message
 
@@ -87,7 +98,12 @@ def formatted_message(message):
 
 if __name__ == "__main__":
     my_inbox = get_inbox()
-    for msg in my_inbox:
-        formatted_message(msg)
+
+count = 0
+for msg in my_inbox:
+    print("\nNEW MESSAGE")
+    formatted_message(msg)
+    count += 1
+
 
 
